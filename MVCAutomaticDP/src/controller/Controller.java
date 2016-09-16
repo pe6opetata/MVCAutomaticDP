@@ -88,21 +88,23 @@ public class Controller {
 		factory.startLabel(writeToLabel);
 
 		for (Question question : baseQuestionnaire.getQuestionsMap().values()) {
-			if (question.getAnswersList() != null && !question.getAnswersList().isEmpty()) {
+			if (question.getAnswersList() != null && !question.getAnswersList().isEmpty() && null != question.getHeader()) {
 				if (isQuestionOfType("dropdown", question))
 					factory.writeSingleLabel(writeToLabel, question);
-				if (isQuestionOfType("radiobutton", question))
+				else if (isQuestionOfType("radiobutton", question))
 					factory.writeSingleLabel(writeToLabel, question);
-				if (isQuestionOfType("checkbox", question))
+				else if (isQuestionOfType("checkbox", question))
 					factory.writeMultiLabel(writeToLabel, question);
-				if (isQuestionOfType("rating", question))
+				else if (isQuestionOfType("rating", question))
 					factory.writeRatingLabel(writeToLabel, question);
-				if (isQuestionOfType("facetrace", question))
+				else if (isQuestionOfType("facetrace", question))
 					factory.writeFTraceLabel(writeToLabel, question);
-				if (isQuestionOfType("age", question))
+				else if (isQuestionOfType("age", question))
 					factory.writeAgeLabel(writeToLabel, question);
-				if (isQuestionOfType("gender", question))
+				else if (isQuestionOfType("gender", question))
 					factory.writeGenderLabel(writeToLabel, question);
+				else 
+					factory.writeSingleLabel(writeToLabel, question);
 			}
 		}
 
