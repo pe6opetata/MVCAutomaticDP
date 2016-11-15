@@ -264,6 +264,9 @@ public class LabelFactory {
 				+ "(iii). STANDARD RATINGS: TOP 2 BOX - " + question.getLabel());
 		writeToLabel.newLine();
 		writeToLabel.flush();
+		writeToLabel.write(question.getHeader().toUpperCase() + "_TOP Statements");
+		writeToLabel.newLine();
+		writeToLabel.flush();
 		for (Answer answer : question.getAnswersList()) {
 			writeToLabel.write("   " + i + " " + answer.getLabel());
 			writeToLabel.newLine();
@@ -279,6 +282,10 @@ public class LabelFactory {
 		i = 1;
 
 		writeToLabel.write("S_" + question.getHeader().toUpperCase() + " \u0019 " + "SUMMARY:");
+		writeToLabel.newLine();
+		writeToLabel.flush();
+		writeToLabel.write(question.getHeader().toUpperCase() + "G " + question.getHeader().toUpperCase()
+				+ ". STANDARD RATINGS: GRID TABLE - " + question.getLabel());
 		writeToLabel.newLine();
 		writeToLabel.flush();
 		for (Answer answer : question.getAnswersList()) {

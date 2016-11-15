@@ -97,6 +97,84 @@ public class OsiFactory {
 	}
 
 	public void writeRatingQuestion(BufferedWriter writeToOsi, Question question) throws IOException {
+		
+		writeToOsi.write("l " + question.getHeader() + "g;anlev=prod");
+		writeToOsi.newLine();
+		writeToOsi.flush();
+		writeToOsi.write("n23 " + question.getHeader() + "_TOP");
+		writeToOsi.newLine();
+		writeToOsi.flush();
+		int colWidth = question.getEndColumn() - question.getStartColumn() + 1;
+		for(int i = 1; i <= question.getAnswersList().size(); i++) {
+			writeToOsi.write("n01   " + i + "   ;col(b)=" + (question.getEndColumn() - 1 + (i-1)*colWidth));
+			writeToOsi.newLine();
+			writeToOsi.flush();	
+		}
+		writeToOsi.newLine();
+		writeToOsi.flush();
+		writeToOsi.write("side");
+		writeToOsi.newLine();
+		writeToOsi.flush();
+		writeToOsi.write("ttl " + question.getHeader() + "g");
+		writeToOsi.newLine();
+		writeToOsi.flush();
+		writeToOsi.write("ttl T_nw2");
+		writeToOsi.newLine();
+		writeToOsi.flush();
+		writeToOsi.write("C n10  T_NW   ;wm=0");
+		writeToOsi.newLine();
+		writeToOsi.flush();
+		writeToOsi.write("n10 TOT");
+		writeToOsi.newLine();
+		writeToOsi.flush();
+		writeToOsi.write("n01   7   ;c=c(b00,b01) .eq. 3;fac=3");
+		writeToOsi.newLine();
+		writeToOsi.flush();
+		writeToOsi.write("n01   6   ;c=c(b00,b01) .eq. 2;fac=2");
+		writeToOsi.newLine();
+		writeToOsi.flush();
+		writeToOsi.write("n01   5   ;c=c(b00,b01) .eq. 1;fac=1");
+		writeToOsi.newLine();
+		writeToOsi.flush();
+		writeToOsi.write("n01   4   ;c=c(b00,b01)=$ 0$;fac=0 ");
+		writeToOsi.newLine();
+		writeToOsi.flush();
+		writeToOsi.write("n01   3   ;c=c(b00,b01) .eq. -1;fac=-1");
+		writeToOsi.newLine();
+		writeToOsi.flush();
+		writeToOsi.write("n01   2   ;c=c(b00,b01) .eq. -2;fac=-2");
+		writeToOsi.newLine();
+		writeToOsi.flush();
+		writeToOsi.write("n01   1   ;c=c(b00,b01) .eq. -3;fac=-3");
+		writeToOsi.newLine();
+		writeToOsi.flush();
+		writeToOsi.write("n03 S_" + question.getHeader());
+		writeToOsi.newLine();
+		writeToOsi.flush();
+		writeToOsi.write("n01   67  ;c=c(b00,b01) .in. (2:3)");
+		writeToOsi.newLine();
+		writeToOsi.flush();
+		writeToOsi.write("n01  345  ;c=c(b00,b01) .in. (-1:1)");
+		writeToOsi.newLine();
+		writeToOsi.flush();
+		writeToOsi.write("n01   12  ;c=c(b00,b01) .in. (-3:-2)");
+		writeToOsi.newLine();
+		writeToOsi.flush();
+		writeToOsi.write("n12 _99  ;dec=6");
+		writeToOsi.newLine();
+		writeToOsi.flush();
+		writeToOsi.write("n20 _98  ;dec=6");
+		writeToOsi.newLine();
+		writeToOsi.flush();
+		writeToOsi.write("n19 _97  ;dec=6");
+		writeToOsi.newLine();
+		writeToOsi.flush();
+		writeToOsi.newLine();
+		writeToOsi.flush();
+		writeToOsi.newLine();
+		writeToOsi.flush();
+		
+		
 		writeToOsi.write("#include s_rat" + question.getAnswersList().size() + ".qin;col(b)=" + (question.getEndColumn() - 1)
 				+ ";qst=" + question.getHeader() + ";lvl=prod");
 		writeToOsi.newLine();
@@ -150,7 +228,7 @@ public class OsiFactory {
 		writeToOsi.write("n15  ;c=-1;op=1;id=z2");
 		writeToOsi.newLine();
 		writeToOsi.flush();
-		writeToOsi.write("n01   _99 ;op=1;ex=z1/z2;dec=6");
+		writeToOsi.write("n01   _99 ;op=1;ex=z1/z2;dec=6;notstat");
 		writeToOsi.newLine();
 		writeToOsi.flush();
 		writeToOsi.write("C n12   _99   ;dec=6");
